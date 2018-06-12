@@ -106,7 +106,7 @@ private[twitter4s] object StreamingMessageFormats extends FormatsComposer {
   private def userStreamingMessageStream(json: JValue)(
       implicit formats: Formats): Stream[() => Option[UserStreamingMessage]] =
     Stream(
-      () => Extraction.extractOpt[DirectMessage](json),
+      () => Extraction.extractOpt[DirectMessage](json \ "direct_message"),
       () => Extraction.extractOpt[TwitterListEvent](json),
       () => Extraction.extractOpt[TweetEvent](json),
       () => Extraction.extractOpt[SimpleEvent](json)
